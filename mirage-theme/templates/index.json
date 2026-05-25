@@ -1,0 +1,124 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "heading": "Révélez votre beauté naturelle",
+        "subheading": "Découvrez notre collection de cosmétiques premium soigneusement sélectionnés pour sublimer votre beauté",
+        "eyebrow": "✨ Mirage Cosmetics — Oran",
+        "btn1_text": "Découvrir la collection",
+        "btn1_url": "/collections/all",
+        "btn2_text": "Nos nouveautés",
+        "btn2_url": "/collections/nouveautes",
+        "bg_color": "#5A7A8A",
+        "bg_color_2": "#3d5a6a",
+        "text_color": "#FFFFFF",
+        "min_height": 600,
+        "text_align": "center"
+      }
+    },
+    "trust": {
+      "type": "trust-badges",
+      "settings": {
+        "bg_color": "#f9f5f0"
+      },
+      "blocks": {
+        "badge1": {
+          "type": "badge",
+          "settings": {
+            "icon": "🚚",
+            "title": "Livraison rapide",
+            "text": "À Oran et environs"
+          }
+        },
+        "badge2": {
+          "type": "badge",
+          "settings": {
+            "icon": "✨",
+            "title": "Produits authentiques",
+            "text": "100% originaux garantis"
+          }
+        },
+        "badge3": {
+          "type": "badge",
+          "settings": {
+            "icon": "🔒",
+            "title": "Paiement sécurisé",
+            "text": "Transactions protégées"
+          }
+        },
+        "badge4": {
+          "type": "badge",
+          "settings": {
+            "icon": "💬",
+            "title": "Service client",
+            "text": "Disponible 7j/7"
+          }
+        }
+      },
+      "blocks_order": ["badge1", "badge2", "badge3", "badge4"]
+    },
+    "categories": {
+      "type": "categories-grid",
+      "settings": {
+        "heading": "Nos catégories",
+        "subheading": "Trouvez les soins adaptés à votre routine beauté"
+      },
+      "blocks": {
+        "cat1": {
+          "type": "category",
+          "settings": {
+            "icon": "🧴",
+            "title": "Skincare",
+            "count": "Soins visage & corps",
+            "bg_color": "#5A7A8A"
+          }
+        },
+        "cat2": {
+          "type": "category",
+          "settings": {
+            "icon": "💄",
+            "title": "Maquillage",
+            "count": "Lèvres, yeux, teint",
+            "bg_color": "#C44B6F"
+          }
+        },
+        "cat3": {
+          "type": "category",
+          "settings": {
+            "icon": "🌿",
+            "title": "Soins complémentaires",
+            "count": "Masques, sérums, huiles",
+            "bg_color": "#8fa8b2"
+          }
+        }
+      },
+      "blocks_order": ["cat1", "cat2", "cat3"]
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Nos bestsellers",
+        "subheading": "Les produits préférés de nos clientes",
+        "products_to_show": 8,
+        "columns_desktop": "4",
+        "show_view_all": true,
+        "view_all_text": "Voir tous les produits",
+        "heading_align": "center"
+      }
+    },
+    "about": {
+      "type": "rich-text",
+      "settings": {
+        "heading": "Notre histoire",
+        "content": "<p>Mirage Cosmetics est née de la passion pour la beauté et le luxe accessible. Basée à Oran, nous sélectionnons pour vous les meilleurs produits cosmétiques alliant qualité internationale et prix justes.</p><p>Notre équipe d'expertes en beauté choisit chaque produit avec soin pour garantir votre satisfaction.</p>",
+        "btn_text": "En savoir plus",
+        "btn_url": "/pages/about",
+        "bg_color": "#f9f5f0",
+        "text_align": "center",
+        "width": "medium"
+      }
+    }
+  },
+  "order": ["hero", "trust", "categories", "featured", "about"]
+}

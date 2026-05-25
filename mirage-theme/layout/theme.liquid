@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#5A7A8A">
+
+  <title>
+    {%- if page_title == blank -%}
+      {{ shop.name }}
+    {%- elsif page_title contains shop.name -%}
+      {{ page_title }}
+    {%- else -%}
+      {{ page_title }} | {{ shop.name }}
+    {%- endif -%}
+  </title>
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+  {%- endif -%}
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Shopify required tag - DO NOT REMOVE -->
+  {{ content_for_header }}
+
+  <!-- Theme styles -->
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+  <script>
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+  </script>
+</head>
+
+<body class="template-{{ template.name | handle }}">
+
+  <!-- Skip to content -->
+  <a class="skip-to-content-link" href="#MainContent">
+    Passer au contenu principal
+  </a>
+
+  <!-- Header -->
+  {%- sections 'header-group' -%}
+
+  <!-- Main content -->
+  <main id="MainContent" class="main-content" role="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  <!-- Footer -->
+  {%- sections 'footer-group' -%}
+
+  <!-- Cart drawer overlay -->
+  <div id="cart-overlay" class="cart-overlay" aria-hidden="true"></div>
+
+  <!-- Theme scripts -->
+  {{ 'theme.js' | asset_url | script_tag }}
+
+</body>
+</html>

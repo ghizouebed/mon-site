@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "show_related": true,
+        "related_title": "Vous aimerez aussi"
+      }
+    }
+  },
+  "order": ["main"]
+}

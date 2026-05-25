@@ -1,0 +1,173 @@
+<section class="hero-banner{% if section.settings.full_height %} hero-banner--full{% endif %}" style="
+  {%- if section.settings.bg_image != blank -%}
+    background-image: linear-gradient(rgba(0,0,0,{{ section.settings.overlay_opacity | divided_by: 100.0 }}), rgba(0,0,0,{{ section.settings.overlay_opacity | divided_by: 100.0 }})), url('{{ section.settings.bg_image | image_url: width: 1920 }}');
+    background-size: cover;
+    background-position: center;
+  {%- else -%}
+    background: linear-gradient(135deg, {{ section.settings.bg_color }} 0%, {{ section.settings.bg_color_2 }} 100%);
+  {%- endif -%}
+  min-height: {{ section.settings.min_height }}px;
+">
+  <div class="hero-banner__container">
+    <div class="hero-banner__content hero-banner__content--{{ section.settings.text_align }}">
+
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="hero-banner__eyebrow" style="color: {{ section.settings.text_color }};">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h1 class="hero-banner__heading" style="color: {{ section.settings.text_color }};">{{ section.settings.heading }}</h1>
+      {%- endif -%}
+
+      {%- if section.settings.subheading != blank -%}
+        <p class="hero-banner__subheading" style="color: {{ section.settings.text_color }};">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+
+      <div class="hero-banner__buttons">
+        {%- if section.settings.btn1_text != blank -%}
+          <a href="{{ section.settings.btn1_url }}" class="btn btn--primary">
+            {{ section.settings.btn1_text }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.btn2_text != blank -%}
+          <a href="{{ section.settings.btn2_url }}" class="btn btn--outline" style="border-color: {{ section.settings.text_color }}; color: {{ section.settings.text_color }};">
+            {{ section.settings.btn2_text }}
+          </a>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bannière hero",
+  "tag": "section",
+  "class": "hero-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Image de fond"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Couleur de fond (si pas d'image)",
+      "default": "#5A7A8A"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_2",
+      "label": "Couleur de fond 2 (dégradé)",
+      "default": "#3d5a6a"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Opacité de l'overlay (avec image)",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "label": "Hauteur minimale",
+      "min": 300,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "default": 550
+    },
+    {
+      "type": "checkbox",
+      "id": "full_height",
+      "label": "Hauteur plein écran",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Alignement du texte",
+      "options": [
+        { "value": "left", "label": "Gauche" },
+        { "value": "center", "label": "Centre" },
+        { "value": "right", "label": "Droite" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Couleur du texte",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Contenu"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Accroche (petit texte au-dessus)",
+      "default": "✨ Beauté & Luxe"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Titre principal",
+      "default": "Révélez votre beauté naturelle"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Sous-titre",
+      "default": "Découvrez notre collection de cosmétiques premium soigneusement sélectionnés pour vous"
+    },
+    {
+      "type": "header",
+      "content": "Bouton 1"
+    },
+    {
+      "type": "text",
+      "id": "btn1_text",
+      "label": "Texte du bouton",
+      "default": "Découvrir la collection"
+    },
+    {
+      "type": "url",
+      "id": "btn1_url",
+      "label": "Lien du bouton"
+    },
+    {
+      "type": "header",
+      "content": "Bouton 2 (optionnel)"
+    },
+    {
+      "type": "text",
+      "id": "btn2_text",
+      "label": "Texte du bouton 2"
+    },
+    {
+      "type": "url",
+      "id": "btn2_url",
+      "label": "Lien du bouton 2"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bannière hero",
+      "settings": {
+        "heading": "Révélez votre beauté naturelle",
+        "subheading": "Découvrez notre collection de cosmétiques premium",
+        "btn1_text": "Découvrir la collection",
+        "eyebrow": "✨ Beauté & Luxe"
+      }
+    }
+  ]
+}
+{% endschema %}

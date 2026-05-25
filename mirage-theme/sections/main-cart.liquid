@@ -1,0 +1,95 @@
+<section class="cart-page section-padding">
+  <div class="container">
+    <h1 class="page-title">Votre panier</h1>
+
+    {%- if cart.item_count > 0 -%}
+      <div class="cart-layout">
+
+        <!-- Articles -->
+        <div class="cart-items">
+          {%- form 'cart', cart, id: 'cart-form' -%}
+            <table class="cart-table" role="table">
+              <thead class="cart-table__head">
+                <tr>
+                  <th scope="col">Produit</th>
+                  <th scope="col">Prix</th>
+                  <th scope="col">Quantité</th>
+                  <th scope="col">Total</th>
+                  <th scope="col"><span class="visually-hidden">Supprimer</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                {%- for item in cart.items -%}
+                  <tr class="cart-item">
+                    <td class="cart-item__product">
+                      <div class="cart-item__media">
+                        {%- if item.image -%}
+                          <img src="{{ item.image | image_url: width: 100 }}" alt="{{ item.title }}" width="100" height="100" loading="lazy">
+                        {%- endif -%}
+                        <div class="cart-item__details">
+                          <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title }}</a>
+                          {%- unless item.product.has_only_default_variant -%}
+                            <p class="cart-item__variant">{{ item.variant.title }}</p>
+                          {%- endunless -%}
+                        </div>
+                      </div>
+                    </td>
+                    <td class="cart-item__price" data-label="Prix">{{ item.price | money }}</td>
+                    <td class="cart-item__quantity" data-label="Quantité">
+                      <div class="quantity-selector quantity-selector--sm">
+                        <button type="button" class="quantity-selector__btn" data-action="minus" data-line="{{ forloop.index }}" aria-label="Diminuer">−</button>
+                        <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" class="quantity-selector__input" aria-label="Quantité de {{ item.title }}">
+                        <button type="button" class="quantity-selector__btn" data-action="plus" data-line="{{ forloop.index }}" aria-label="Augmenter">+</button>
+                      </div>
+                    </td>
+                    <td class="cart-item__total" data-label="Total">{{ item.final_line_price | money }}</td>
+                    <td class="cart-item__remove">
+                      <a href="{{ item.url_to_remove }}" class="cart-item__remove-btn" aria-label="Supprimer {{ item.title }}">✕</a>
+                    </td>
+                  </tr>
+                {%- endfor -%}
+              </tbody>
+            </table>
+
+            <div class="cart-actions">
+              <button type="submit" name="update" class="btn btn--outline">Mettre à jour le panier</button>
+            </div>
+
+          {%- endform -%}
+        </div>
+
+        <!-- Récapitulatif -->
+        <div class="cart-summary">
+          <div class="cart-summary__box">
+            <h2 class="cart-summary__title">Récapitulatif</h2>
+            <div class="cart-summary__subtotal">
+              <span>Sous-total</span>
+              <span>{{ cart.total_price | money }}</span>
+            </div>
+            <p class="cart-summary__note">Taxes et frais de livraison calculés à la validation</p>
+            <a href="{{ routes.checkout }}" class="btn btn--primary btn--full cart-summary__checkout">
+              Passer commande ({{ cart.total_price | money }})
+            </a>
+            <a href="{{ routes.all_products_collection_url }}" class="cart-summary__continue">← Continuer mes achats</a>
+          </div>
+        </div>
+
+      </div>
+    {%- else -%}
+      <div class="cart-empty">
+        <p class="cart-empty__icon">🛒</p>
+        <h2 class="cart-empty__title">Votre panier est vide</h2>
+        <p class="cart-empty__text">Découvrez nos produits et commencez vos achats !</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary">Découvrir nos produits</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Page panier",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,46 @@
+<section class="search-page section-padding">
+  <div class="container">
+    <h1 class="page-title">Recherche</h1>
+
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search-form">
+      <input type="hidden" name="type" value="product">
+      <div class="search-form__row">
+        <input
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="Rechercher un produit..."
+          class="search-form__input"
+          aria-label="Rechercher"
+        >
+        <button type="submit" class="btn btn--primary search-form__btn">Rechercher</button>
+      </div>
+    </form>
+
+    {%- if search.performed -%}
+      {%- if search.results_count > 0 -%}
+        <p class="search-results-count">
+          {{ search.results_count }} résultat{% if search.results_count > 1 %}s{% endif %} pour "<strong>{{ search.terms }}</strong>"
+        </p>
+        <div class="product-grid product-grid--4">
+          {%- for result in search.results -%}
+            {%- if result.object_type == 'product' -%}
+              {%- render 'product-card', product: result -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <p class="search-no-results">Aucun résultat pour "<strong>{{ search.terms }}</strong>".</p>
+        <p>Essayez un autre terme de recherche ou <a href="{{ routes.all_products_collection_url }}">parcourez tous nos produits</a>.</p>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Page de recherche",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

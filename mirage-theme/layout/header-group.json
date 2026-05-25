@@ -1,0 +1,25 @@
+{
+  "type": "header",
+  "name": "En-tête",
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "settings": {
+        "text": "🌸 Livraison gratuite à Oran dès 3000 DA d'achats",
+        "show_bar": true,
+        "color_background": "#C44B6F",
+        "color_text": "#FFFFFF"
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo_position": "center",
+        "menu": "main-menu",
+        "show_search": true,
+        "show_cart": true
+      }
+    }
+  },
+  "order": ["announcement", "header"]
+}

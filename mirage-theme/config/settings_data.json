@@ -1,0 +1,19 @@
+{
+  "current": {
+    "color_primary": "#5A7A8A",
+    "color_accent": "#C44B6F",
+    "color_background": "#FFFFFF",
+    "color_text": "#1a1a1a",
+    "color_text_light": "#666666",
+    "font_heading": "Playfair Display",
+    "font_body": "Inter",
+    "logo_width": 160,
+    "sticky_header": true,
+    "show_currency": false,
+    "enable_quick_add": true,
+    "product_card_style": "shadow",
+    "products_per_row": "4",
+    "cart_type": "drawer"
+  },
+  "presets": {}
+}

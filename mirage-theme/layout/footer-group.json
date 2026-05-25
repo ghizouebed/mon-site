@@ -1,0 +1,16 @@
+{
+  "type": "footer",
+  "name": "Pied de page",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "show_social": true,
+        "show_newsletter": true,
+        "newsletter_text": "Inscrivez-vous pour recevoir nos offres exclusives",
+        "copyright_text": "© 2024 Mirage Cosmetics, Oran. Tous droits réservés."
+      }
+    }
+  },
+  "order": ["footer"]
+}

@@ -1,0 +1,88 @@
+<section class="collection-page section-padding">
+  <div class="container">
+
+    <!-- En-tête collection -->
+    <div class="collection-header">
+      {%- if collection.image -%}
+        <div class="collection-header__image">
+          <img src="{{ collection.image | image_url: width: 1200 }}" alt="{{ collection.title }}" width="1200" height="400" loading="eager" style="object-fit:cover; width:100%; height:300px;">
+        </div>
+      {%- endif -%}
+      <h1 class="collection-header__title">{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}
+        <div class="collection-header__desc rte">{{ collection.description }}</div>
+      {%- endif -%}
+    </div>
+
+    <!-- Barre filtres + tri -->
+    <div class="collection-toolbar">
+      <p class="collection-toolbar__count">
+        {{ collection.products_count }} produit{% if collection.products_count > 1 %}s{% endif %}
+      </p>
+      <div class="collection-toolbar__sort">
+        <label for="sort-select" class="visually-hidden">Trier par</label>
+        <select id="sort-select" name="sort_by" class="sort-select" onchange="window.location.search='?sort_by='+this.value">
+          <option value="manual"{% if collection.sort_by == 'manual' %} selected{% endif %}>Recommandés</option>
+          <option value="best-selling"{% if collection.sort_by == 'best-selling' %} selected{% endif %}>Meilleures ventes</option>
+          <option value="price-ascending"{% if collection.sort_by == 'price-ascending' %} selected{% endif %}>Prix croissant</option>
+          <option value="price-descending"{% if collection.sort_by == 'price-descending' %} selected{% endif %}>Prix décroissant</option>
+          <option value="created-descending"{% if collection.sort_by == 'created-descending' %} selected{% endif %}>Nouveautés</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Grille produits -->
+    {%- paginate collection.products by section.settings.products_per_page -%}
+      <div class="product-grid product-grid--{{ section.settings.columns_desktop }}">
+        {%- for product in collection.products -%}
+          {%- render 'product-card', product: product -%}
+        {%- else -%}
+          <p class="collection-empty">Aucun produit dans cette collection.</p>
+        {%- endfor -%}
+      </div>
+
+      <!-- Pagination -->
+      {%- if paginate.pages > 1 -%}
+        <nav class="pagination" aria-label="Pagination">
+          {%- if paginate.previous -%}
+            <a href="{{ paginate.previous.url }}" class="pagination__btn">← Précédent</a>
+          {%- endif -%}
+          <span class="pagination__info">Page {{ paginate.current_page }} / {{ paginate.pages }}</span>
+          {%- if paginate.next -%}
+            <a href="{{ paginate.next.url }}" class="pagination__btn">Suivant →</a>
+          {%- endif -%}
+        </nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Page collection",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Produits par page",
+      "min": 12,
+      "max": 48,
+      "step": 4,
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Colonnes (desktop)",
+      "options": [
+        { "value": "2", "label": "2 colonnes" },
+        { "value": "3", "label": "3 colonnes" },
+        { "value": "4", "label": "4 colonnes" }
+      ],
+      "default": "4"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,182 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Mirage Cosmetics",
+    "theme_version": "1.0.0",
+    "theme_author": "Mirage",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Couleurs",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Couleur principale",
+        "default": "#5A7A8A"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Couleur accent",
+        "default": "#C44B6F"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Couleur de fond",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Couleur du texte",
+        "default": "#1a1a1a"
+      },
+      {
+        "type": "color",
+        "id": "color_text_light",
+        "label": "Couleur du texte secondaire",
+        "default": "#666666"
+      }
+    ]
+  },
+  {
+    "name": "Typographie",
+    "settings": [
+      {
+        "type": "select",
+        "id": "font_heading",
+        "label": "Police des titres",
+        "options": [
+          { "value": "Playfair Display", "label": "Playfair Display (Élégant)" },
+          { "value": "Georgia", "label": "Georgia" },
+          { "value": "Inter", "label": "Inter (Moderne)" }
+        ],
+        "default": "Playfair Display"
+      },
+      {
+        "type": "select",
+        "id": "font_body",
+        "label": "Police du corps",
+        "options": [
+          { "value": "Inter", "label": "Inter" },
+          { "value": "Helvetica Neue", "label": "Helvetica Neue" },
+          { "value": "Georgia", "label": "Georgia" }
+        ],
+        "default": "Inter"
+      }
+    ]
+  },
+  {
+    "name": "En-tête",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Largeur du logo",
+        "min": 80,
+        "max": 300,
+        "step": 10,
+        "unit": "px",
+        "default": 160
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      },
+      {
+        "type": "checkbox",
+        "id": "sticky_header",
+        "label": "En-tête fixe au défilement",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Boutique",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_currency",
+        "label": "Afficher le sélecteur de devise",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_quick_add",
+        "label": "Activer l'ajout rapide au panier",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "product_card_style",
+        "label": "Style des cartes produit",
+        "options": [
+          { "value": "minimal", "label": "Minimaliste" },
+          { "value": "bordered", "label": "Avec bordure" },
+          { "value": "shadow", "label": "Avec ombre" }
+        ],
+        "default": "shadow"
+      },
+      {
+        "type": "select",
+        "id": "products_per_row",
+        "label": "Produits par ligne",
+        "options": [
+          { "value": "2", "label": "2 produits" },
+          { "value": "3", "label": "3 produits" },
+          { "value": "4", "label": "4 produits" }
+        ],
+        "default": "4"
+      }
+    ]
+  },
+  {
+    "name": "Panier",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Type de panier",
+        "options": [
+          { "value": "page", "label": "Page panier" },
+          { "value": "drawer", "label": "Tiroir panier" }
+        ],
+        "default": "drawer"
+      }
+    ]
+  },
+  {
+    "name": "Réseaux sociaux",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook",
+        "label": "Facebook"
+      },
+      {
+        "type": "url",
+        "id": "social_tiktok",
+        "label": "TikTok"
+      },
+      {
+        "type": "url",
+        "id": "social_youtube",
+        "label": "YouTube"
+      }
+    ]
+  }
+]

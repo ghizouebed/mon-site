@@ -1,0 +1,55 @@
+{
+  "general": {
+    "search": {
+      "placeholder": "Rechercher un produit...",
+      "submit": "Rechercher",
+      "no_results": "Aucun résultat"
+    },
+    "pagination": {
+      "previous": "Précédent",
+      "next": "Suivant"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Ajouter au panier",
+      "sold_out": "Rupture de stock",
+      "unavailable": "Indisponible",
+      "quantity": "Quantité",
+      "description": "Description",
+      "related_title": "Vous aimerez aussi",
+      "share": "Partager"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Votre panier",
+      "empty": "Votre panier est vide",
+      "checkout": "Passer commande",
+      "subtotal": "Sous-total",
+      "continue_shopping": "Continuer mes achats"
+    },
+    "label": {
+      "product": "Produit",
+      "price": "Prix",
+      "quantity": "Quantité",
+      "total": "Total",
+      "remove": "Supprimer"
+    }
+  },
+  "collections": {
+    "general": {
+      "title": "Collections",
+      "items_with_count": {
+        "one": "{{ count }} produit",
+        "other": "{{ count }} produits"
+      }
+    }
+  },
+  "newsletter": {
+    "subscribe": "S'inscrire",
+    "email_placeholder": "Votre email",
+    "success": "Merci pour votre inscription !",
+    "error": "Veuillez entrer une adresse email valide."
+  }
+}
