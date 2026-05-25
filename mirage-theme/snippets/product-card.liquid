@@ -1,7 +1,7 @@
 {%- assign card_product = product -%}
 {%- assign first_available_variant = card_product.first_available_variant -%}
 
-<div class="product-card product-card--{{ settings.product_card_style }}">
+<div class="product-card product-card--shadow">
   <a href="{{ card_product.url }}" class="product-card__link" aria-label="{{ card_product.title }}">
 
     <!-- Image -->
@@ -34,8 +34,8 @@
       <!-- Badges -->
       <div class="product-card__badges">
         {%- if card_product.available == false -%}
-          <span class="product-badge product-badge--sold-out">Rupture de stock</span>
-        {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
+          <span class="product-badge product-badge--sold-out">Rupture</span>
+        {%- elsif card_product.compare_at_price > card_product.price -%}
           {%- assign saving_pct = card_product.compare_at_price | minus: card_product.price | times: 100 | divided_by: card_product.compare_at_price -%}
           <span class="product-badge product-badge--sale">-{{ saving_pct }}%</span>
         {%- endif -%}
@@ -44,7 +44,9 @@
 
     <!-- Infos -->
     <div class="product-card__body">
-      <p class="product-card__vendor">{{ card_product.vendor }}</p>
+      {%- if card_product.vendor != blank -%}
+        <p class="product-card__vendor">{{ card_product.vendor }}</p>
+      {%- endif -%}
       <h3 class="product-card__title">{{ card_product.title }}</h3>
       <div class="product-card__price">
         {%- if card_product.compare_at_price > card_product.price -%}
@@ -58,18 +60,23 @@
 
   </a>
 
-  <!-- Bouton ajout rapide -->
-  {%- if settings.enable_quick_add and card_product.available -%}
-    {%- if card_product.has_only_default_variant -%}
-      <form action="{{ routes.cart_add_url }}" method="post" class="product-card__quick-add">
-        <input type="hidden" name="id" value="{{ first_available_variant.id }}">
-        <input type="hidden" name="quantity" value="1">
-        <button type="submit" class="product-card__add-btn" aria-label="Ajouter {{ card_product.title }} au panier">
-          + Ajouter
-        </button>
-      </form>
+  <!-- Footer: bouton -->
+  <div class="product-card__footer">
+    {%- if card_product.available -%}
+      {%- if card_product.has_only_default_variant and settings.enable_quick_add -%}
+        <form action="{{ routes.cart_add_url }}" method="post" class="product-card__quick-add">
+          <input type="hidden" name="id" value="{{ first_available_variant.id }}">
+          <input type="hidden" name="quantity" value="1">
+          <button type="submit" class="product-card__add-btn" aria-label="Ajouter {{ card_product.title }} au panier">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            Ajouter au panier
+          </button>
+        </form>
+      {%- else -%}
+        <a href="{{ card_product.url }}" class="product-card__add-btn">Voir le produit →</a>
+      {%- endif -%}
     {%- else -%}
-      <a href="{{ card_product.url }}" class="product-card__add-btn">Voir le produit</a>
+      <span class="product-card__add-btn" style="opacity:0.5;cursor:not-allowed;">Rupture de stock</span>
     {%- endif -%}
-  {%- endif -%}
+  </div>
 </div>

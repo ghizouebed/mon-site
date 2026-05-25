@@ -4,121 +4,157 @@
       "type": "hero-banner",
       "settings": {
         "heading": "Révélez votre beauté naturelle",
-        "subheading": "Découvrez notre collection de cosmétiques premium soigneusement sélectionnés pour sublimer votre beauté",
+        "subheading": "Cosmétiques premium soigneusement sélectionnés • Livraison à Oran",
         "eyebrow": "✨ Mirage Cosmetics — Oran",
-        "btn1_text": "Découvrir la collection",
+        "btn1_text": "Découvrir nos produits",
         "btn1_url": "/collections/all",
-        "btn2_text": "Nos nouveautés",
-        "btn2_url": "/collections/nouveautes",
+        "btn2_text": "Skincare coréenne",
+        "btn2_url": "/collections/skincare",
         "bg_color": "#5A7A8A",
         "bg_color_2": "#3d5a6a",
         "text_color": "#FFFFFF",
-        "min_height": 600,
+        "min_height": 580,
         "text_align": "center"
       }
     },
     "trust": {
       "type": "trust-badges",
       "settings": {
+        "bg_color": "#FFFFFF"
+      },
+      "blocks": {
+        "b1": { "type": "badge", "settings": { "icon": "🚚", "title": "Livraison rapide", "text": "Oran et environs" } },
+        "b2": { "type": "badge", "settings": { "icon": "✨", "title": "100% authentiques", "text": "Produits originaux garantis" } },
+        "b3": { "type": "badge", "settings": { "icon": "🔒", "title": "Paiement sécurisé", "text": "Transactions protégées" } },
+        "b4": { "type": "badge", "settings": { "icon": "💬", "title": "Conseils beauté", "text": "Équipe experte 7j/7" } }
+      },
+      "blocks_order": ["b1","b2","b3","b4"]
+    },
+    "brands": {
+      "type": "brands-bar",
+      "settings": {
+        "heading": "Nos marques",
         "bg_color": "#f9f5f0"
       },
       "blocks": {
-        "badge1": {
-          "type": "badge",
-          "settings": {
-            "icon": "🚚",
-            "title": "Livraison rapide",
-            "text": "À Oran et environs"
-          }
-        },
-        "badge2": {
-          "type": "badge",
-          "settings": {
-            "icon": "✨",
-            "title": "Produits authentiques",
-            "text": "100% originaux garantis"
-          }
-        },
-        "badge3": {
-          "type": "badge",
-          "settings": {
-            "icon": "🔒",
-            "title": "Paiement sécurisé",
-            "text": "Transactions protégées"
-          }
-        },
-        "badge4": {
-          "type": "badge",
-          "settings": {
-            "icon": "💬",
-            "title": "Service client",
-            "text": "Disponible 7j/7"
-          }
-        }
+        "br1": { "type": "brand", "settings": { "name": "Medicube" } },
+        "br2": { "type": "brand", "settings": { "name": "Bioderma" } },
+        "br3": { "type": "brand", "settings": { "name": "La Roche-Posay" } },
+        "br4": { "type": "brand", "settings": { "name": "Vichy" } },
+        "br5": { "type": "brand", "settings": { "name": "The Ordinary" } },
+        "br6": { "type": "brand", "settings": { "name": "Skin1004" } },
+        "br7": { "type": "brand", "settings": { "name": "Clinique" } },
+        "br8": { "type": "brand", "settings": { "name": "Aroma-Zone" } }
       },
-      "blocks_order": ["badge1", "badge2", "badge3", "badge4"]
+      "blocks_order": ["br1","br2","br3","br4","br5","br6","br7","br8"]
     },
     "categories": {
       "type": "categories-grid",
       "settings": {
         "heading": "Nos catégories",
-        "subheading": "Trouvez les soins adaptés à votre routine beauté"
+        "subheading": "Des soins adaptés à chaque étape de votre routine"
       },
       "blocks": {
-        "cat1": {
-          "type": "category",
-          "settings": {
-            "icon": "🧴",
-            "title": "Skincare",
-            "count": "Soins visage & corps",
-            "bg_color": "#5A7A8A"
-          }
-        },
-        "cat2": {
-          "type": "category",
-          "settings": {
-            "icon": "💄",
-            "title": "Maquillage",
-            "count": "Lèvres, yeux, teint",
-            "bg_color": "#C44B6F"
-          }
-        },
-        "cat3": {
-          "type": "category",
-          "settings": {
-            "icon": "🌿",
-            "title": "Soins complémentaires",
-            "count": "Masques, sérums, huiles",
-            "bg_color": "#8fa8b2"
-          }
-        }
+        "cat1": { "type": "category", "settings": { "icon": "🧴", "title": "Skincare", "count": "Sérums, crèmes, soins", "bg_color": "#5A7A8A" } },
+        "cat2": { "type": "category", "settings": { "icon": "☀️", "title": "Protection solaire", "count": "SPF50+, toutes textures", "bg_color": "#C44B6F" } },
+        "cat3": { "type": "category", "settings": { "icon": "🌿", "title": "Soins complémentaires", "count": "Corps, cils, toniques", "bg_color": "#8fa8b2" } }
       },
-      "blocks_order": ["cat1", "cat2", "cat3"]
+      "blocks_order": ["cat1","cat2","cat3"]
     },
-    "featured": {
+    "bestsellers": {
       "type": "featured-collection",
       "settings": {
         "heading": "Nos bestsellers",
-        "subheading": "Les produits préférés de nos clientes",
+        "subheading": "Les produits préférés de nos clientes à Oran",
         "products_to_show": 8,
         "columns_desktop": "4",
         "show_view_all": true,
-        "view_all_text": "Voir tous les produits",
+        "view_all_text": "Voir tous les produits →",
         "heading_align": "center"
       }
     },
     "about": {
+      "type": "image-with-text",
+      "settings": {
+        "heading": "Pourquoi choisir Mirage Cosmetics ?",
+        "eyebrow": "Notre engagement",
+        "content": "<p>Basée à Oran, Mirage Cosmetics sélectionne pour vous les meilleurs actifs de la K-beauty et des grandes marques européennes. Chaque produit est soigneusement choisi pour son efficacité, son authenticité et sa qualité.</p>",
+        "btn_text": "Notre histoire",
+        "btn_url": "/pages/about",
+        "bg_color": "#FFFFFF",
+        "text_color": "#1a1a1a",
+        "image_position": "right"
+      },
+      "blocks": {
+        "p1": { "type": "point", "settings": { "icon": "✓", "title": "Produits 100% authentiques", "text": "Importés directement des marques" } },
+        "p2": { "type": "point", "settings": { "icon": "✓", "title": "Expertise skincare", "text": "Conseils personnalisés K-beauty" } },
+        "p3": { "type": "point", "settings": { "icon": "✓", "title": "Livraison express", "text": "À Oran et toute l'Algérie" } }
+      },
+      "blocks_order": ["p1","p2","p3"]
+    },
+    "new-arrivals": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Soins complémentaires",
+        "subheading": "The Ordinary, Mavala, Etiaxil et plus",
+        "products_to_show": 4,
+        "columns_desktop": "4",
+        "show_view_all": true,
+        "view_all_text": "Voir tous →",
+        "heading_align": "center"
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {
+        "heading": "Ce que disent nos clientes",
+        "subheading": "Des milliers de femmes font confiance à Mirage Cosmetics",
+        "bg_color": "#f9f5f0"
+      },
+      "blocks": {
+        "t1": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "text": "Les produits Medicube ont complètement transformé ma peau en 4 semaines. Le sérum PDRN est absolument incroyable !",
+            "name": "Yasmine B.",
+            "product": "PDRN Pink Collagen Capsule Cream"
+          }
+        },
+        "t2": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "text": "Enfin une boutique sérieuse à Oran avec des vrais produits La Roche-Posay. Livraison rapide et emballage soigné.",
+            "name": "Sara K.",
+            "product": "La Roche-Posay Anthelios"
+          }
+        },
+        "t3": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "text": "Le The Ordinary Niacinamide a réduit mes pores visiblement. Prix imbattable et service impeccable !",
+            "name": "Nadia M.",
+            "product": "The Ordinary Niacinamide 10%"
+          }
+        }
+      },
+      "blocks_order": ["t1","t2","t3"]
+    },
+    "rich-text-cta": {
       "type": "rich-text",
       "settings": {
-        "heading": "Notre histoire",
-        "content": "<p>Mirage Cosmetics est née de la passion pour la beauté et le luxe accessible. Basée à Oran, nous sélectionnons pour vous les meilleurs produits cosmétiques alliant qualité internationale et prix justes.</p><p>Notre équipe d'expertes en beauté choisit chaque produit avec soin pour garantir votre satisfaction.</p>",
-        "btn_text": "En savoir plus",
-        "btn_url": "/pages/about",
-        "bg_color": "#f9f5f0",
+        "heading": "Votre beauté, notre priorité",
+        "content": "<p>Découvrez plus de 80 produits cosmétiques premium, de la K-beauty aux grandes marques européennes. Skincare, protection solaire, soins corps — tout ce dont votre peau a besoin.</p>",
+        "btn_text": "Voir toute la boutique",
+        "btn_url": "/collections/all",
+        "bg_color": "#5A7A8A",
+        "text_color": "#FFFFFF",
         "text_align": "center",
         "width": "medium"
       }
     }
   },
-  "order": ["hero", "trust", "categories", "featured", "about"]
+  "order": ["hero","trust","brands","categories","bestsellers","about","new-arrivals","testimonials","rich-text-cta"]
 }

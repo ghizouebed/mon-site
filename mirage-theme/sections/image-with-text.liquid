@@ -1,0 +1,172 @@
+<section class="image-with-text section-padding" style="background-color: {{ section.settings.bg_color }};">
+  <div class="container">
+    <div class="image-with-text__grid{% if section.settings.image_position == 'right' %} image-with-text__grid--reverse{% endif %}">
+
+      <!-- Image -->
+      <div class="image-with-text__media">
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 800 }}"
+            alt="{{ section.settings.image_alt | default: section.settings.heading }}"
+            width="800"
+            height="800"
+            loading="lazy"
+            class="image-with-text__img"
+          >
+        {%- else -%}
+          <div class="image-with-text__placeholder" style="background: linear-gradient(135deg, var(--color-primary), var(--color-accent));">
+            <span style="font-size: 4rem;">✨</span>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Texte -->
+      <div class="image-with-text__content">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="image-with-text__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="image-with-text__heading" style="color: {{ section.settings.text_color }};">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.content != blank -%}
+          <div class="image-with-text__text rte" style="color: {{ section.settings.text_color }};">{{ section.settings.content }}</div>
+        {%- endif -%}
+
+        <!-- Points clés -->
+        {%- if section.blocks.size > 0 -%}
+          <ul class="image-with-text__points" role="list">
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when 'point' -%}
+                  <li class="image-with-text__point" {{ block.shopify_attributes }}>
+                    <span class="image-with-text__point-icon">{{ block.settings.icon }}</span>
+                    <div>
+                      <strong style="color: {{ section.settings.text_color }};">{{ block.settings.title }}</strong>
+                      {%- if block.settings.text != blank -%}
+                        <p style="color: {{ section.settings.text_color }}; opacity: 0.75;">{{ block.settings.text }}</p>
+                      {%- endif -%}
+                    </div>
+                  </li>
+              {%- endcase -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if section.settings.btn_text != blank -%}
+          <a href="{{ section.settings.btn_url }}" class="btn btn--primary" style="margin-top: 28px;">
+            {{ section.settings.btn_text }}
+          </a>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image avec texte",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Texte alternatif de l'image"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Position de l'image",
+      "options": [
+        { "value": "left", "label": "Gauche" },
+        { "value": "right", "label": "Droite" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Couleur de fond",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Couleur du texte",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Accroche",
+      "default": "Notre histoire"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titre",
+      "default": "La beauté à votre portée"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Texte",
+      "default": "<p>Mirage Cosmetics vous propose une sélection unique de cosmétiques premium, soigneusement choisis pour sublimer votre beauté naturelle.</p>"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Bouton"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Lien du bouton"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Point clé",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Emoji / Icône",
+          "default": "✓"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titre",
+          "default": "Produits authentiques"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image avec texte",
+      "settings": {
+        "heading": "La beauté à votre portée",
+        "eyebrow": "Notre engagement"
+      },
+      "blocks": [
+        { "type": "point", "settings": { "icon": "✨", "title": "Produits authentiques", "text": "Sélection rigoureuse" } },
+        { "type": "point", "settings": { "icon": "🚚", "title": "Livraison rapide", "text": "À Oran et environs" } },
+        { "type": "point", "settings": { "icon": "💬", "title": "Conseils beauté", "text": "Notre équipe vous guide" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
