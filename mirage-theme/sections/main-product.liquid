@@ -1,11 +1,38 @@
 {%- assign current_variant = product.selected_or_first_available_variant -%}
 {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
 
+<!-- Données produit pour le sélecteur de variantes (JS) -->
+<script type="application/json" id="product-json">
+  {
+    "id": {{ product.id }},
+    "handle": {{ product.handle | json }},
+    "url": {{ product.url | json }},
+    "moneyFormat": {{ shop.money_format | json }},
+    "variants": [
+      {%- for variant in product.variants -%}
+        {
+          "id": {{ variant.id }},
+          "title": {{ variant.title | json }},
+          "price": {{ variant.price }},
+          "compareAtPrice": {{ variant.compare_at_price | default: 0 }},
+          "available": {{ variant.available }},
+          "options": [
+            {%- for option in variant.options -%}
+              {{ option | json }}{% unless forloop.last %},{% endunless %}
+            {%- endfor -%}
+          ],
+          "featuredImage": {% if variant.featured_image %}{{ variant.featured_image | image_url: width: 800 | json }}{% else %}null{% endif %}
+        }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  }
+</script>
+
 <section class="product-page section-padding">
   <div class="container">
     <div class="product-layout">
 
-      <!-- Images produit -->
+      <!-- ========= IMAGES ========= -->
       <div class="product-media">
         <div class="product-media__main">
           {%- if product.images.size > 0 -%}
@@ -13,7 +40,7 @@
               {%- if featured_image != blank -%}
                 <img
                   src="{{ featured_image | image_url: width: 800 }}"
-                  alt="{{ featured_image.alt | default: product.title }}"
+                  alt="{{ featured_image.alt | default: product.title | escape }}"
                   width="800"
                   height="800"
                   loading="eager"
@@ -23,10 +50,24 @@
               {%- endif -%}
             </div>
             {%- if product.images.size > 1 -%}
-              <div class="product-media__thumbnails">
-                {%- for image in product.images limit: 6 -%}
-                  <button class="product-media__thumb{% if forloop.first %} active{% endif %}" data-src="{{ image | image_url: width: 800 }}" aria-label="{{ image.alt | default: product.title }}">
-                    <img src="{{ image | image_url: width: 120 }}" alt="{{ image.alt | default: product.title }}" width="120" height="120" loading="lazy">
+              <div class="product-media__thumbnails" role="list" aria-label="Galerie d'images">
+                {%- for image in product.images limit: 8 -%}
+                  <button
+                    class="product-media__thumb{% if forloop.first %} active{% endif %}"
+                    data-src="{{ image | image_url: width: 800 }}"
+                    data-image-id="{{ image.id }}"
+                    aria-label="Image {{ forloop.index }} : {{ image.alt | default: product.title }}"
+                    aria-pressed="{{ forloop.first }}"
+                    role="listitem"
+                    type="button"
+                  >
+                    <img
+                      src="{{ image | image_url: width: 120 }}"
+                      alt="{{ image.alt | default: product.title | escape }}"
+                      width="120"
+                      height="120"
+                      loading="lazy"
+                    >
                   </button>
                 {%- endfor -%}
               </div>
@@ -39,51 +80,65 @@
         </div>
       </div>
 
-      <!-- Infos produit -->
-      <div class="product-info">
+      <!-- ========= INFOS PRODUIT ========= -->
+      <div class="product-info" id="product-info">
 
         <!-- Breadcrumb -->
         <nav class="breadcrumb" aria-label="Fil d'Ariane">
           <a href="{{ routes.root_url }}">Accueil</a>
-          <span aria-hidden="true"> / </span>
+          <span aria-hidden="true">›</span>
           {%- if product.collections.first -%}
             <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
-            <span aria-hidden="true"> / </span>
+            <span aria-hidden="true">›</span>
           {%- endif -%}
-          <span aria-current="page">{{ product.title }}</span>
+          <span aria-current="page">{{ product.title | truncate: 40 }}</span>
         </nav>
+
+        <!-- Marque -->
+        {%- if product.vendor != blank -%}
+          <p class="product-info__vendor">{{ product.vendor }}</p>
+        {%- endif -%}
 
         <!-- Titre -->
         <h1 class="product-info__title">{{ product.title }}</h1>
 
         <!-- Prix -->
-        <div class="product-info__price" id="product-price">
+        <div class="product-info__price" id="product-price" aria-live="polite">
           {%- if current_variant.compare_at_price > current_variant.price -%}
-            <span class="price price--sale">{{ current_variant.price | money }}</span>
-            <span class="price price--compare">{{ current_variant.compare_at_price | money }}</span>
-            <span class="price-badge">
-              -{%- assign saving = current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price -%}
-              {{ saving }}%
+            <span class="price price--sale" id="price-sale">{{ current_variant.price | money }}</span>
+            <span class="price price--compare" id="price-compare">{{ current_variant.compare_at_price | money }}</span>
+            <span class="price-badge" id="price-badge">
+              -{%- assign saving = current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price -%}{{ saving }}%
             </span>
           {%- else -%}
-            <span class="price">{{ current_variant.price | money }}</span>
+            <span class="price" id="price-regular">{{ current_variant.price | money }}</span>
           {%- endif -%}
         </div>
 
-        <!-- Formulaire d'ajout au panier -->
+        <!-- Disponibilité -->
+        <p class="product-info__stock" id="product-stock">
+          {%- if current_variant.available -%}
+            <span class="stock-badge stock-badge--in">✓ En stock</span>
+          {%- else -%}
+            <span class="stock-badge stock-badge--out">Rupture de stock</span>
+          {%- endif -%}
+        </p>
+
+        <!-- ===== FORMULAIRE ===== -->
         {%- form 'product', product, id: 'product-form', novalidate: 'novalidate' -%}
+
+          <!-- Champ variant (mis à jour par JS) -->
           <input type="hidden" name="id" value="{{ current_variant.id }}" id="variant-id">
 
-          <!-- Variantes -->
+          <!-- Sélecteur de variantes -->
           {%- unless product.has_only_default_variant -%}
-            <div class="product-variants">
+            <div class="product-variants" id="product-variants">
               {%- for option in product.options_with_values -%}
-                <div class="product-variant-group">
+                <div class="product-variant-group" data-option-index="{{ forloop.index0 }}">
                   <label class="product-variant-group__label">
-                    {{ option.name }}:
-                    <span class="product-variant-group__selected" id="selected-{{ option.name | handleize }}">{{ option.selected_value }}</span>
+                    {{ option.name }}&nbsp;:&nbsp;<span class="product-variant-group__selected" id="option-selected-{{ forloop.index0 }}">{{ option.selected_value }}</span>
                   </label>
-                  <div class="product-variant-group__options">
+                  <div class="product-variant-group__options" role="group" aria-label="Choisir {{ option.name }}">
                     {%- for value in option.values -%}
                       <button
                         type="button"
@@ -91,9 +146,7 @@
                         data-option-index="{{ forloop.parentloop.index0 }}"
                         data-option-value="{{ value | escape }}"
                         aria-pressed="{{ option.selected_value == value }}"
-                      >
-                        {{ value }}
-                      </button>
+                      >{{ value }}</button>
                     {%- endfor -%}
                   </div>
                 </div>
@@ -105,36 +158,48 @@
           <div class="product-quantity">
             <label for="product-qty" class="product-quantity__label">Quantité</label>
             <div class="quantity-selector">
-              <button type="button" class="quantity-selector__btn" data-action="minus" aria-label="Diminuer la quantité">−</button>
-              <input type="number" id="product-qty" name="quantity" value="1" min="1" class="quantity-selector__input" aria-label="Quantité">
-              <button type="button" class="quantity-selector__btn" data-action="plus" aria-label="Augmenter la quantité">+</button>
+              <button type="button" class="quantity-selector__btn" data-action="minus" aria-label="Diminuer">−</button>
+              <input type="number" id="product-qty" name="quantity" value="1" min="1" max="99" class="quantity-selector__input" aria-label="Quantité">
+              <button type="button" class="quantity-selector__btn" data-action="plus" aria-label="Augmenter">+</button>
             </div>
           </div>
 
           <!-- Bouton ajouter au panier -->
           <div class="product-actions">
-            {%- if current_variant.available -%}
-              <button type="submit" name="add" class="btn btn--primary btn--full btn--add-to-cart">
-                <span>Ajouter au panier</span>
-              </button>
-            {%- else -%}
-              <button type="button" class="btn btn--disabled btn--full" disabled>
-                Rupture de stock
-              </button>
-            {%- endif -%}
+            <button
+              type="submit"
+              name="add"
+              id="add-to-cart-btn"
+              class="btn btn--primary btn--full btn--add-to-cart{% unless current_variant.available %} btn--disabled{% endunless %}"
+              {% unless current_variant.available %}disabled{% endunless %}
+            >
+              <span id="add-to-cart-text">
+                {%- if current_variant.available -%}Ajouter au panier{%- else -%}Rupture de stock{%- endif -%}
+              </span>
+            </button>
           </div>
 
         {%- endform -%}
 
-        <!-- Description courte -->
+        <!-- Séparateur -->
+        <hr class="product-divider">
+
+        <!-- Description -->
         {%- if product.description != blank -%}
           <div class="product-info__description">
-            <h3 class="product-info__desc-title">Description</h3>
-            <div class="rte">{{ product.description }}</div>
+            <details class="product-accordion" open>
+              <summary class="product-accordion__trigger">
+                <span>Description</span>
+                <span class="product-accordion__icon" aria-hidden="true">+</span>
+              </summary>
+              <div class="product-accordion__content rte">
+                {{ product.description }}
+              </div>
+            </details>
           </div>
         {%- endif -%}
 
-        <!-- Tags / badges -->
+        <!-- Tags -->
         {%- if product.tags.size > 0 -%}
           <div class="product-tags">
             {%- for tag in product.tags -%}
@@ -146,8 +211,14 @@
         <!-- Partage -->
         <div class="product-share">
           <span class="product-share__label">Partager :</span>
-          <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url }}{{ product.url }}" target="_blank" rel="noopener" class="product-share__link" aria-label="Partager sur Facebook">Facebook</a>
-          <a href="https://wa.me/?text={{ product.title | url_encode }}%20{{ shop.url }}{{ product.url }}" target="_blank" rel="noopener" class="product-share__link" aria-label="Partager sur WhatsApp">WhatsApp</a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url | append: product.url | url_encode }}"
+             target="_blank" rel="noopener noreferrer" class="product-share__link" aria-label="Partager sur Facebook">
+            Facebook
+          </a>
+          <a href="https://wa.me/?text={{ product.title | url_encode }}%20-%20{{ shop.url | append: product.url | url_encode }}"
+             target="_blank" rel="noopener noreferrer" class="product-share__link" aria-label="Partager sur WhatsApp">
+            WhatsApp
+          </a>
         </div>
 
       </div>
@@ -155,22 +226,30 @@
   </div>
 </section>
 
-<!-- Produits liés -->
+<!-- ========= PRODUITS LIÉS ========= -->
 {%- if section.settings.show_related -%}
-  {%- assign related_products = product.collections.first.products -%}
-  {%- if related_products.size > 1 -%}
-    <section class="related-products section-padding">
-      <div class="container">
-        <h2 class="section-header__title text-center">{{ section.settings.related_title }}</h2>
-        <div class="product-grid product-grid--4">
-          {%- for related_product in related_products limit: 4 -%}
-            {%- unless related_product.id == product.id -%}
-              {%- render 'product-card', product: related_product -%}
-            {%- endunless -%}
-          {%- endfor -%}
+  {%- if product.collections.first != blank -%}
+    {%- assign related_collection = product.collections.first -%}
+    {%- if related_collection.products_count > 1 -%}
+      <section class="related-products section-padding">
+        <div class="container">
+          <div class="section-header text-center">
+            <h2 class="section-header__title">{{ section.settings.related_title }}</h2>
+          </div>
+          <div class="product-grid product-grid--4">
+            {%- assign related_count = 0 -%}
+            {%- for related_product in related_collection.products -%}
+              {%- unless related_product.id == product.id -%}
+                {%- if related_count < 4 -%}
+                  {%- render 'product-card', product: related_product -%}
+                  {%- assign related_count = related_count | plus: 1 -%}
+                {%- endif -%}
+              {%- endunless -%}
+            {%- endfor -%}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    {%- endif -%}
   {%- endif -%}
 {%- endif -%}
 

@@ -21,7 +21,7 @@
       </p>
       <div class="collection-toolbar__sort">
         <label for="sort-select" class="visually-hidden">Trier par</label>
-        <select id="sort-select" name="sort_by" class="sort-select" onchange="window.location.search='?sort_by='+this.value">
+        <select id="sort-select" name="sort_by" class="sort-select" aria-label="Trier les produits">
           <option value="manual"{% if collection.sort_by == 'manual' %} selected{% endif %}>Recommandés</option>
           <option value="best-selling"{% if collection.sort_by == 'best-selling' %} selected{% endif %}>Meilleures ventes</option>
           <option value="price-ascending"{% if collection.sort_by == 'price-ascending' %} selected{% endif %}>Prix croissant</option>
