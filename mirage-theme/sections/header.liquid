@@ -8,7 +8,7 @@
 
     <!-- Logo -->
     <div class="site-header__logo">
-      <a href="{{ routes.root_url }}" class="site-header__logo-link">
+      <a href="{{ routes.root_url }}" class="site-header__logo-link" aria-label="{{ shop.name }}">
         {%- if settings.logo != blank -%}
           <img
             src="{{ settings.logo | image_url: width: settings.logo_width }}"
@@ -16,9 +16,17 @@
             width="{{ settings.logo_width }}"
             height="auto"
             loading="eager"
+            class="site-header__logo-img"
           >
         {%- else -%}
-          <span class="site-header__logo-text">{{ shop.name }}</span>
+          <img
+            src="{{ 'mirage-logo.svg' | asset_url }}"
+            alt="{{ shop.name }}"
+            width="200"
+            height="60"
+            loading="eager"
+            class="site-header__logo-img site-header__logo-img--svg"
+          >
         {%- endif -%}
       </a>
     </div>

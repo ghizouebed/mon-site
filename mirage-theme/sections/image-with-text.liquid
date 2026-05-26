@@ -6,10 +6,19 @@
       <div class="image-with-text__media">
         {%- if section.settings.image != blank -%}
           <img
-            src="{{ section.settings.image | image_url: width: 800 }}"
+            src="{{ section.settings.image | image_url: width: 900 }}"
             alt="{{ section.settings.image_alt | default: section.settings.heading }}"
-            width="800"
-            height="800"
+            width="900"
+            height="900"
+            loading="lazy"
+            class="image-with-text__img"
+          >
+        {%- elsif section.settings.image_url != blank -%}
+          <img
+            src="{{ section.settings.image_url }}"
+            alt="{{ section.settings.image_alt | default: section.settings.heading }}"
+            width="900"
+            height="900"
             loading="lazy"
             class="image-with-text__img"
           >
@@ -71,7 +80,12 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Image"
+      "label": "Image (depuis Shopify)"
+    },
+    {
+      "type": "text",
+      "id": "image_url",
+      "label": "URL image externe (Unsplash, etc.)"
     },
     {
       "type": "text",

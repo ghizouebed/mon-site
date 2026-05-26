@@ -1,6 +1,11 @@
 <section class="hero-banner{% if section.settings.full_height %} hero-banner--full{% endif %}" style="
+  {%- assign overlay = section.settings.overlay_opacity | divided_by: 100.0 -%}
   {%- if section.settings.bg_image != blank -%}
-    background-image: linear-gradient(rgba(0,0,0,{{ section.settings.overlay_opacity | divided_by: 100.0 }}), rgba(0,0,0,{{ section.settings.overlay_opacity | divided_by: 100.0 }})), url('{{ section.settings.bg_image | image_url: width: 1920 }}');
+    background-image: linear-gradient(rgba(0,0,0,{{ overlay }}), rgba(0,0,0,{{ overlay }})), url('{{ section.settings.bg_image | image_url: width: 1920 }}');
+    background-size: cover;
+    background-position: center;
+  {%- elsif section.settings.bg_image_url != blank -%}
+    background-image: linear-gradient(rgba(0,0,0,{{ overlay }}), rgba(0,0,0,{{ overlay }})), url('{{ section.settings.bg_image_url }}');
     background-size: cover;
     background-position: center;
   {%- else -%}
@@ -49,7 +54,13 @@
     {
       "type": "image_picker",
       "id": "bg_image",
-      "label": "Image de fond"
+      "label": "Image de fond (depuis Shopify)"
+    },
+    {
+      "type": "text",
+      "id": "bg_image_url",
+      "label": "URL image externe (Unsplash, etc.)",
+      "info": "Utilisé si aucune image Shopify n'est sélectionnée"
     },
     {
       "type": "color",

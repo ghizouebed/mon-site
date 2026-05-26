@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" role="img" aria-label="Mirage Cosmetics">
+  <title>Mirage Cosmetics</title>
+
+  <!-- ======================== -->
+  <!-- BADGE CIRCULAIRE (gauche) -->
+  <!-- ======================== -->
+
+  <!-- Cercle principal -->
+  <circle cx="60" cy="60" r="53" fill="none" stroke="#5A7A8A" stroke-width="1.3"/>
+
+  <!-- Trois points décoratifs au-dessus -->
+  <circle cx="60" cy="5.5" r="2.5" fill="#C44B6F"/>
+  <circle cx="70" cy="9.5" r="1.6" fill="#C44B6F" opacity="0.65"/>
+  <circle cx="50" cy="9.5" r="1.6" fill="#C44B6F" opacity="0.65"/>
+
+  <!-- Branche / feuilles en haut du cercle -->
+  <path d="M 41,19 Q 60,8 79,19" fill="none" stroke="#5A7A8A" stroke-width="0.95"/>
+  <!-- Feuille gauche grande -->
+  <path d="M 41,19 C 34,11 31,19 37,25 C 40,28 44,23 41,19 Z" fill="#5A7A8A" opacity="0.52"/>
+  <!-- Feuille gauche petite -->
+  <path d="M 50,11 C 44,3 41,11 47,15 Z" fill="#5A7A8A" opacity="0.38"/>
+  <!-- Feuille droite grande -->
+  <path d="M 79,19 C 86,11 89,19 83,25 C 80,28 76,23 79,19 Z" fill="#5A7A8A" opacity="0.52"/>
+  <!-- Feuille droite petite -->
+  <path d="M 70,11 C 76,3 79,11 73,15 Z" fill="#5A7A8A" opacity="0.38"/>
+  <!-- Petit bourgeon central -->
+  <path d="M 58.5,8.5 L 60,3 L 61.5,8.5" fill="none" stroke="#5A7A8A" stroke-width="0.9"/>
+
+  <!-- ======================== -->
+  <!-- PROFIL FEMME (face droite) -->
+  <!-- ======================== -->
+
+  <!-- Chevelure qui s'étend vers l'arrière -->
+  <path d="M 41,30 C 34,20 27,16 29,25 C 31,32 35,32 37,34" fill="none" stroke="#5A7A8A" stroke-width="1.05"/>
+  <path d="M 38,24 C 31,12 22,15 24,26" fill="none" stroke="#5A7A8A" stroke-width="0.9"/>
+
+  <!-- Profil du visage (front, nez, lèvres, menton, cou) -->
+  <path d="
+    M 41,30
+    C 45,22 54,22 57,30
+    C 60,37 58,46 55,52
+    L 63,60
+    C 59,67 58,72 61,78
+    C 63,82 59,88 54,93
+    L 49,102 L 44,103 L 42,97
+    C 44,88 46,80 44,73
+    C 42,66 40,61 42,55
+    C 44,49 47,45 45,39
+    C 43,33 40,30 39,26
+  " fill="none" stroke="#5A7A8A" stroke-width="1.05" stroke-linejoin="round" stroke-linecap="round"/>
+
+  <!-- Arrière de la tête / nuque -->
+  <path d="M 41,30 C 34,33 28,44 30,57 C 32,70 37,85 40,103 L 44,103"
+    fill="none" stroke="#5A7A8A" stroke-width="1.05"/>
+
+  <!-- Œil (point) -->
+  <circle cx="54" cy="41" r="1.3" fill="#5A7A8A"/>
+
+  <!-- Sourcil (arc subtil) -->
+  <path d="M 49,36 Q 54,33 59,36" fill="none" stroke="#5A7A8A" stroke-width="0.85"/>
+
+  <!-- ======================== -->
+  <!-- TEXTE "Mirage" dans le badge -->
+  <!-- ======================== -->
+  <text x="78" y="72"
+    font-family="Palatino, 'Palatino Linotype', 'Book Antiqua', Georgia, serif"
+    font-style="italic"
+    font-size="19"
+    fill="#C44B6F"
+    text-anchor="middle"
+    font-weight="400">Mirage</text>
+
+  <!-- Swash décoratif sous "Mirage" -->
+  <path d="M 63,77 C 70,80 84,79 92,76" fill="none" stroke="#C44B6F" stroke-width="0.75" opacity="0.5"/>
+
+  <!-- "COSMETICS" tout en bas du badge -->
+  <text x="60" y="97"
+    font-family="Arial, 'Helvetica Neue', sans-serif"
+    font-size="5.5"
+    fill="#5A7A8A"
+    text-anchor="middle"
+    letter-spacing="2.8"
+    font-weight="600">COSMETICS</text>
+
+  <!-- ======================== -->
+  <!-- SÉPARATEUR VERTICAL -->
+  <!-- ======================== -->
+  <line x1="118" y1="22" x2="118" y2="98" stroke="#5A7A8A" stroke-width="0.6" opacity="0.25"/>
+
+  <!-- ======================== -->
+  <!-- TEXTE PRINCIPAL (droite) -->
+  <!-- ======================== -->
+
+  <!-- "MIRAGE" en grandes capitales teales -->
+  <text x="262" y="62"
+    font-family="'Gill Sans MT', 'Gill Sans', 'Century Gothic', Calibri, Arial, sans-serif"
+    font-size="44"
+    fill="#5A7A8A"
+    text-anchor="middle"
+    letter-spacing="10"
+    font-weight="300">MIRAGE</text>
+
+  <!-- "COSMETICS" en petites capitales rose en dessous -->
+  <text x="262" y="80"
+    font-family="Arial, 'Helvetica Neue', sans-serif"
+    font-size="9"
+    fill="#C44B6F"
+    text-anchor="middle"
+    letter-spacing="7"
+    font-weight="600">COSMETICS</text>
+
+</svg>

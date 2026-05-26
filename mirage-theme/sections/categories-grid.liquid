@@ -18,15 +18,24 @@
               <div class="category-card__image-wrap">
                 {%- if block.settings.image != blank -%}
                   <img
-                    src="{{ block.settings.image | image_url: width: 600 }}"
+                    src="{{ block.settings.image | image_url: width: 800 }}"
                     alt="{{ block.settings.title }}"
-                    width="600"
-                    height="600"
+                    width="800"
+                    height="800"
+                    loading="lazy"
+                    class="category-card__image"
+                  >
+                {%- elsif block.settings.image_url != blank -%}
+                  <img
+                    src="{{ block.settings.image_url }}"
+                    alt="{{ block.settings.title }}"
+                    width="800"
+                    height="800"
                     loading="lazy"
                     class="category-card__image"
                   >
                 {%- else -%}
-                  <div class="category-card__placeholder" style="background-color: {{ block.settings.bg_color }};"></div>
+                  <div class="category-card__placeholder" style="background: linear-gradient(160deg, {{ block.settings.bg_color }}, {{ block.settings.bg_color_2 }});"></div>
                 {%- endif -%}
                 <div class="category-card__overlay"></div>
               </div>
@@ -73,13 +82,24 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Image"
+          "label": "Image (depuis Shopify)"
+        },
+        {
+          "type": "text",
+          "id": "image_url",
+          "label": "URL image externe (Unsplash, etc.)"
         },
         {
           "type": "color",
           "id": "bg_color",
           "label": "Couleur de fond (sans image)",
           "default": "#5A7A8A"
+        },
+        {
+          "type": "color",
+          "id": "bg_color_2",
+          "label": "Couleur de fond 2 (dégradé)",
+          "default": "#3d5a6a"
         },
         {
           "type": "text",
