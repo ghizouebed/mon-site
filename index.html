@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ghizlène Bedrane — Portfolio</title>
+  <meta name="description" content="Site vitrine de Ghizlène Bedrane, en apprentissage du développement web.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="navbar">
+      <a href="#accueil" class="logo">Mirage</a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#apropos">À propos</a></li>
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="accueil" class="hero">
+      <div class="container">
+        <h1>Salut, je suis Ghizlène 👋</h1>
+        <p class="hero-subtitle">Future développeuse web — en apprentissage, avec l'ambition de devenir pionnière dans l'IT.</p>
+        <a href="#projets" class="btn">Voir mes projets</a>
+      </div>
+    </section>
+
+    <section id="apropos" class="section">
+      <div class="container">
+        <h2>À propos</h2>
+        <p>
+          Je suis en train d'apprendre le développement web à partir de zéro.
+          Ce site est mon terrain d'entraînement : chaque page, chaque fonctionnalité
+          ajoutée ici représente une nouvelle notion apprise et mise en pratique.
+        </p>
+      </div>
+    </section>
+
+    <section id="projets" class="section section-alt">
+      <div class="container">
+        <h2>Mes projets</h2>
+        <div class="cards">
+          <article class="card">
+            <h3>Ce site — Mirage</h3>
+            <p>Mon tout premier projet : un site vitrine construit avec HTML, CSS et JavaScript.</p>
+          </article>
+          <article class="card card-placeholder">
+            <h3>Prochain projet</h3>
+            <p>À venir — chaque nouveau projet viendra s'ajouter ici au fil de mon apprentissage.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container">
+        <h2>Contact</h2>
+        <p>Une question, une idée de collaboration ? Écris-moi.</p>
+        <a href="mailto:ghizlene.bedrane4@gmail.com" class="btn btn-outline">Envoyer un email</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Ghizlène Bedrane. Fait avec curiosité et beaucoup d'apprentissage.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
